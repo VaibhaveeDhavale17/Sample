@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>New Hope Resque The Charity Management</title>
+        <link rel="stylesheet" href="bs.min.css" type="text/css"/>
+        <script type="text/javascript" src="bootstrap1/js/bootstrap.min.js"></script>
+		<script src="bootstrap1/js/jquery-3.6.0.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Abril Fatface' rel='stylesheet'>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+
+
+    </head>
+    <body>
+        			<?php 
+				$errors = array(); 
+				$db = mysqli_connect('localhost', 'root', 'root', 'information');
+				$email3=$password3=$name1Err=$email1Err=$password1Err=$password2Err=$passwordErr=$passworddbErr=$emaildbErr=$femail=$fpassword=$fname="";
+				$n1="";
+				if($_SERVER["REQUEST_METHOD"]=="POST"){
+					$fname=$_POST["name1"];
+					$femail=$_POST["email1"];
+					$fpassword=$_POST["password1"];
+					if(empty($_POST["name1"])){
+						$name1Err="Name is required";
+						array_push($errors, "Name is required");
+					}
+					if(empty($_POST["email1"])){
+						$email1Err="Email is required";
+						array_push($errors, "Email is required");
+					}
+					if(empty($_POST["password1"])){
+						$password1Err="Password is required";
+						array_push($errors, "Password is required");
+					}
+					if(empty($_POST["password2"])){
+						$password2Err="Password is required";
+						array_push($errors, "Password is required");
+					}
+					if($_POST["password1"]!=$_POST["password2"]){
+						$passwordErr="Passwords must be same";
+						array_push($errors, "Passwords must be same");
+					}
+					$user_check_query = "SELECT * FROM registration WHERE emaildb='$femail' OR passworddb='$fpassword' LIMIT 1";
+					$result = mysqli_query($db, $user_check_query);
+					$user = mysqli_fetch_assoc($result);
+  
+					if ($user) { 
+						if ($user['emaildb'] === $femail) {
+							$emaildbErr="email already exists";
+							array_push($errors, "Username already exists");
+						}
+
+						if ($user['passworddb'] === $fpassword) {
+							$passworddbErr="Password already exists";
+							array_push($errors, "email already exists");
+						}
+					}
+						
+					
+					if (count($errors) == 0) {
+					//$password = md5($password_2);encrypt the password before saving in the database
+					$query = "INSERT INTO registration (namedb, emaildb, passworddb) VALUES('$fname', '$femail', '$fpassword')";
+					mysqli_query($db, $query);
+					$n1="You are successfulyy registered";
+					}
+					
+					mysqli_close($db);			
+					        
+				}
+			?>
+			<div class="container" style="background-color: #FFC76C;margin: 20px auto 20px;">
+					<p><span class="error">*required field.</span></p>
+					<div class="col-lg-4">
+                    <form method="post" action="<?php $_PHP_SELF?>">
+						 <div class="mb-1">
+                          <label for="name1" class="form-label">Your Name</label>
+                          <input type="text" class="form-control" name="name1"/>
+						  <span class="error">*<?php echo $name1Err;?></span>
+                        </div>
+                       <div class="mb-1">
+                          <label for="email1" class="form-label">Email address</label>
+                          <input type="email" class="form-control" name="email1" aria-describedby="emailHelp"/>
+                          <div id="emailHelp" class="form-text"> </div>
+						  <span class="error">*<?php echo $email1Err;?></span>
+						  <span class="error">*<?php echo $emaildbErr;?></span>
+                        </div>
+                <div class="mb-1">
+                  <label for="password1" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password1">
+				  <span class="error">*<?php echo $password1Err;?></span>
+				  <span class="error">*<?php echo $passworddbErr;?></span>
+                </div> 
+				<div class="mb-1 d-block">
+                  <label for="password2" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" name="password2">
+				  <span class="error">*<?php echo $password2Err;?></span>
+				  <span class="error">*<?php echo $passwordErr;?></span>
+                </div> 
+					<div><?php echo $n1;?></div>
+                <button type="submit" name="s1" class="btn btn-primary">Register</button>
+                    </form>  
+				</div>					
+        </div>
+		</div>
+        <span class="d-inline position-relative bottom-0 end-0 container-fluid" style="background-color: #D4D4D4;float: left;">
+			<div style="float: left; font-weight: bolder;font-family: 'Libre Baskerville', serif;">
+				<p>Contact on:<br>1234567890<br>Address:<br>Govt. Polytechnic, Karad, Dist. Satara,<br>Maharashtra, Pin Code:415110</p>
+			</div>
+			<div style="float: right;">
+				<img src="payu1.png" height="100px" width="167px" style="margin: 20px 20px 20px;"/>
+			</div>
+		</span>
+    </body>
+</html>

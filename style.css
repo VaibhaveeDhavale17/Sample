@@ -1,0 +1,24 @@
+.navcustom{
+    display: block;
+    background-color: #A8DADC;
+    font-family: Abril Fatface ;
+}
+.layout1{
+    color:#E2213A ;
+    font-family: Abril Fatface ;
+    margin:0px 20px 5px;
+}
+bg1{
+    background-color: #FFC76C;
+}
+.p2{
+    font-size :20px;
+}
+.p3{
+    float: left;
+    color:#221763;
+    font-size: 15px;
+}
+.i1{
+    margin: 20px 10px 20px;
+}

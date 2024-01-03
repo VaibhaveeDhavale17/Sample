@@ -1,0 +1,21 @@
+body {
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100vh;
+    background-color: #f1f1f1;
+  }
+
+.box-shadow {
+    font-family: roboto, sans-serif;
+    background-color: #ccd1ce;
+    color: rgb(19, 18, 18);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 20px 23px #d1e0d7;
+  }
+  .control-label{
+      font-style:bold;
+  }

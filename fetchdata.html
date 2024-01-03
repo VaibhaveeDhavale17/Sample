@@ -1,0 +1,30 @@
+
+    <body>
+            <?php
+            $conn=mysqli_connect("localhost:3306",'root','',"stud_data");
+            $sql2 = "SELECT firstname, lastname,email FROM student1";
+            $result = mysqli_query($conn,$sql2);
+            ?>
+            <table>
+                <tr>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>email</th>
+                </tr>
+              
+               <?php 
+               
+                while($row = mysqli_fetch_array($result))
+                 {
+                   echo "<tr>";
+                        echo "<td>" ." Name: " . $row["firstname"]."</td>";
+                        echo "<td>" . $row["lastname"]."</td>" ;
+                        echo "<td>" .email: " . $row["email"]."</td>";
+                    echo "</tr>";
+                   echo "<br>";
+                }
+                 
+                ?>
+            </table>
+        </div>
+    </body>
